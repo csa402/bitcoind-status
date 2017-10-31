@@ -30,6 +30,9 @@ $config = array(
   'ignore_unknown_ping'       => false,
   'peers_to_ignore'           => array(),
 
+  // Staking
+  'display_staking_info'      => false,
+  
   // Cache
   'cache_geo_data'            => false,
   'geo_cache_file'            => '/var/tmp/bitcoind-geolocation.cache',
