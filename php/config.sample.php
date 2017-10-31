@@ -14,12 +14,12 @@ $config = array(
   'rpc_user'                  => 'rpcuser',
   'rpc_pass'                  => 'rpcpass',
   'rpc_host'                  => 'localhost',
-  'rpc_port'                  => '8332',
+  'rpc_port'                  => '6969',
   'rpc_ssl'                   => false,
   'rpc_ssl_ca'                => null,
 
   // Donations
-  'display_donation_text'     => true,
+  'display_donation_text'     => false,
   'donation_address'          => 'not_set',
   'donation_amount'           => '0.001',
 
@@ -31,7 +31,7 @@ $config = array(
   'peers_to_ignore'           => array(),
 
   // Staking
-  'display_stake_info'        => false,
+  'display_stake_info'        => true,
   'display_balance'           => false,
 
   // Cache
@@ -49,10 +49,10 @@ $config = array(
 
   // UI
   'display_ip'                => false,
-  'display_free_disk_space'   => false,
+  'display_free_disk_space'   => true,
   'display_testnet'           => false,
   'display_version'           => true,
-  'display_github_ribbon'     => true,
+  'display_github_ribbon'     => false,
   'display_max_height'        => true,
   'use_bitcoind_ip'           => true,
   'intro_text'                => 'not_set',
