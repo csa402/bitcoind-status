@@ -104,6 +104,9 @@
       <p>Please report this to <a href="mailto:<?php echo $config['admin_email']; ?>"><?php echo $config['admin_email']; ?></a></p>
     </div>
 <?php } else { ?>
+<?php if (isset($config['display_version']) && $config['display_version']) { ?>
+      <p class="stat"><span class="label">Node Version:</span> <?php echo preg_replace(array('/\//','/:/'),array('',' '),$data['net_info']['subversion']); ?></p>
+<?php } ?>
       <p class="stat"><span class="label">Number of Connections:</span> <?php echo $data['connections']; ?></p>
 <?php if ($data['display_connection_chart'] === true) { ?>
       <div id="connection_chart" style="width: 100%; height: 20%"></div>
@@ -111,15 +114,24 @@
 <?php if ($data['display_peer_chart'] === true) { ?>
       <div id="peer_chart" style="width: 100%; height: 20%"></div>
 <?php } ?>
-      <p class="stat"><span class="label">Blocks:</span> <?php echo $data['blocks']; ?></p>
+      <p class="stat"><span class="label">Actual Blocks:</span> <?php echo $data['blocks']; ?></p>
 <?php if (isset($config['display_testnet']) && $config['display_testnet']) { ?>
       <p class="stat"><span class="label">Testnet:</span> <?php echo ($data['testnet']) ? "Yes" : "No"; ?></p>
+<?php } ?>
+<?php if ($config['display_balance']) { ?>
+      <p class="stat"><span class="label">Balance:</span> <?php echo ($data['balance']); ?></p>
 <?php } ?>
 <?php if (isset($config['display_ip']) && $config['display_ip']) { ?>
       <p class="stat"><span class="label">Node IP Address:</span> <?php echo $data['node_ip']; ?></p>
 <?php } ?>
-<?php if (isset($config['display_version']) && $config['display_version']) { ?>
-      <p class="stat"><span class="label">Node Version:</span> <?php echo preg_replace(array('/\//','/:/'),array('',' '),$data['net_info']['subversion']); ?></p>
+<?php if ($config['display_stake_info']) { ?>
+      <p class="stat"><span class="label">Staking Enabled:</span> <?php echo ($data['stake']['enabled']?'Yes':'No'); ?></p>
+<?php } ?>
+<?php if ($config['display_stake_info']) { ?>
+      <p class="stat"><span class="label">Staking Working:</span> <?php echo ($data['stake']['staking']?'Yes':'No'); ?></p>
+<?php } ?>
+<?php if ($config['display_stake_info']) { ?>
+      <p class="stat"><span class="label">Expected Time:</span> <?php echo ($data['stake']['expectedtime']); ?></p>
 <?php } ?>
 <?php if (isset($data['bitcoind_uptime'])) { ?>
       <p class="stat"><span class="label">OKcash Daemon Uptime:</span> <?php echo $data['bitcoind_uptime']; ?></p>
@@ -127,9 +139,11 @@
 <?php if ((isset($data['ip_location'])) && (strcmp($data['ip_location']['country_code'], 'blank') != 0)) { ?>
       <p class="stat"><span class="label">Node Location:</span> <img src="img/blank.gif" class="flag flag-<?php echo strtolower($data['ip_location']['country_code']); ?>" alt="<?php echo $data['ip_location']['country_name']; ?>" /> <?php echo $data['ip_location']['country_name']; ?></p>
 <?php } ?>
+
 <?php if (isset($data['free_disk_space'])) { ?>
       <p class="stat"><span class="label">Free Disk Space:</span> <?php echo $data['free_disk_space']; ?></p>
 <?php } ?>
+
 <?php if (isset($data['cache_time']) & $config['use_cache'] === TRUE) { ?>
       <p class="stat"><span class="label">Last Updated:</span> <?php echo date($config['date_format'], $data['cache_time']); ?> (refreshes every <?php echo ($config['max_cache_time']/60); ?> minutes, next at <?php echo date('H:i:s',$data['cache_expiry']) ?>)</p>
 <?php } ?>
@@ -176,10 +190,7 @@
   <div id="footer" class="pure-u-1-1 pure-u-md-1-1 pure-u-lg-1-1">
     <hr />
     <p>
-       <a href="https://github.com/craigwatson/bitcoind-status">Bitcoin Daemon Status Page</a> by <a href="https://cwatson.org">Craig Watson</a>, distributed under the <a href="https://www.apache.org/licenses/LICENSE-2.0">Apache License v2.0</a><br />
-       Please send donations to: <a href="https://www.blocktrail.com/BTC/address/15sLQBY3TnCRX5rYLqt8gxPqmnxU4JrKBn" target="_blank">15sLQBY3TnCRX5rYLqt8gxPqmnxU4JrKBn</a><br />
-       IP Geolocation by <a href="http://www.geoplugin.com" target="_new">geoPlugin</a>, using GeoLite2 data from <a href="https://www.maxmind.com" target="_new">MaxMind</a><br />
-       Page generated in <?php echo round((microtime(TRUE)-$_SERVER['REQUEST_TIME_FLOAT']), 4); ?> seconds, using <?php echo $curl_requests; ?> remote request(s)<br />
+       	Page generated in <?php echo round((microtime(TRUE)-$_SERVER['REQUEST_TIME_FLOAT']), 4); ?> seconds, using <?php echo $curl_requests; ?> remote request(s)<br />
     </p>
     <?php if ($config['display_github_ribbon'] === TRUE) { ?>
       <p>

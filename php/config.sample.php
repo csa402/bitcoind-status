@@ -32,7 +32,8 @@ $config = array(
 
   // Staking
   'display_stake_info'        => false,
-  
+  'display_balance'           => false,
+
   // Cache
   'cache_geo_data'            => false,
   'geo_cache_file'            => '/var/tmp/bitcoind-geolocation.cache',
