@@ -31,7 +31,7 @@ $config = array(
   'peers_to_ignore'           => array(),
 
   // Staking
-  'display_staking_info'      => false,
+  'display_stake_info'        => false,
   
   // Cache
   'cache_geo_data'            => false,
