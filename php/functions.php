@@ -85,7 +85,13 @@ function getData($from_cache = false)
             $data['node_ip'] = $_SERVER['SERVER_ADDR'];
         }
     }
-
+   
+   //stake
+    if ($config['display_stake_info'] === true ) {
+        //$data['peers'] = parsePeers($bitcoin->getpeerinfo(), $geo_curl);
+        $data['stake'] =  $bitcoin->getstakinginfo();
+    }
+	
     // Create geo handle
     if (($config['display_ip_location'] === true) || ($config['geolocate_peer_ip'] === true)) {
         $geo_curl = curl_init();
